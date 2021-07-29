@@ -6,7 +6,7 @@
 /*   By: pyg <pyg@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/07/15 18:41:42 by pyg              ###   ########.fr       */
+/*   Updated: 2021/07/15 19:10:02 by pyg              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 typedef struct	s_philo
 {
