@@ -5,7 +5,7 @@
 //? LEAKS
 //? NO LIBFT
 
-//! if sleep 	- not eat	not think
+//! if sleep	- not eat	not think
 //! if eat		- not sleep	not think
 //! if think	- not sleep	not eat
 
@@ -174,6 +174,9 @@
 */
 
 
+//? MAN PTHREAD_MUTEX_DESTROY
+//? MAN PTHREAD_MUTEX_LOCK
+//? MAN PTHREAD_MUTEX_UNLOCK
 
 
 

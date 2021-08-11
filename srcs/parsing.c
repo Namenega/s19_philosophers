@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyg <pyg@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/07/15 18:53:23 by pyg              ###   ########.fr       */
+/*   Updated: 2021/08/11 15:10:35 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ static int	parse_time_values(t_philo *ph, char **av)
 static int	check_num_values(t_philo *philo, char **av)
 {
 	philo->num_philo = ft_atoi(av[1]);
-	if (philo->num_philo > 200 || philo->num_philo < 2)
+	if (/*philo->num_philo > 200 || */philo->num_philo < 1)
 	{
-		error_msg("ERROR: 1st ARG must be a number between 2 & 200.\n");
+		error_msg("ERROR: 1st ARG must be a number >= 1.\n");
+		// error_msg("ERROR: 1st ARG must be a number between 2 & 200.\n");
 		return (0);
 	}
 	philo->num_forks = ft_atoi(av[1]);

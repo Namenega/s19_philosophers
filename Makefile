@@ -1,5 +1,6 @@
 SRCNAME 	=	srcs/main.c				\
 				srcs/parsing.c			\
+				srcs/philo.c			\
 				srcs/utils_0.c
 
 SRCS 		= ${SRCNAME}
@@ -8,9 +9,9 @@ OBJS 		= ${SRCS:.c=.o}
 
 NAME		= philo
 
-CC 			= gcc -g -fsanitize=address
+CC 			= gcc -g #-fsanitize=address
 RM 			= rm -f
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -pthread -Wall -Wextra -Werror
 
 CGREEN		= \033[38;2;0;153;0m
 CRED		= \033[0;31m

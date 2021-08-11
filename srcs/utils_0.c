@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyg <pyg@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/07/15 18:18:38 by pyg              ###   ########.fr       */
+/*   Updated: 2021/08/11 16:38:45 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,11 @@ int	ft_atoi(const char *nptr)
 	}
 	// compteur = norminette_v3(result, compteur);
 	return (result);
+}
+
+t_philo	*get_struct(void)
+{
+	static t_philo ph;
+
+	return (&ph);
 }
