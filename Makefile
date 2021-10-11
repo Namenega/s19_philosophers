@@ -1,7 +1,7 @@
 SRCNAME 	=	srcs/main.c				\
 				srcs/parsing.c			\
-				srcs/philo.c			\
-				srcs/utils_0.c
+				srcs/utils_0.c			\
+				srcs/philo.c
 
 SRCS 		= ${SRCNAME}
 

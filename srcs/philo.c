@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/08/11 17:42:58 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:35:56 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long int	what_time(t_philo *ph)
 
 	gettimeofday(&tv, NULL);
 	ms = tv.tv_sec * 1000;
-	// ms += tv.tv_usec / 1000;
+	ms += tv.tv_usec / 1000;
 	return (ms - ph->start_time);
 }
 
@@ -45,10 +45,11 @@ int	philo(t_philo *ph)
 	{
 		a = malloc(sizeof(int));
 		*a = i;
+		printf("test [%d]\n", i);
 		if (pthread_create(&ph->philo[i], NULL, &routine, a) != 0)
 		{
 			error_msg("ERROR: fail to _create threads");
-			return (0);
+			return (-1);
 		}
 		i++;
 	}
@@ -58,7 +59,7 @@ int	philo(t_philo *ph)
 		if (pthread_join(ph->philo[i], NULL) != 0)
 		{
 			error_msg("ERROR: fail to _join threads");
-			return (0);
+			return (-1);
 		}
 		i++;
 	}

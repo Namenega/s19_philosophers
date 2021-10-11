@@ -101,8 +101,11 @@
 ** #include <pthread.h>
 ** int	pthread_create(pthread_t *thread, pthread_attr_t * attr, void * (*start_routine)(void *), void * arg);
 **
+** 1st param est le pointeur vers une variable (pthread_t) créée.
+** exemple : pthread_create(&t1, ......);
+**
 ** Crée un nouveau thread s'exécutant simultanément avec le thread appelant
-** Nouveau thread exécute la fonction 'start routine' en lui passant 'arg' comme premier argument
+** Nouveau thread exécute la fonction 'start routine' (void*) en lui passant 'arg' comme premier argument
 ** 
 ** S'arrête avec pthread_exit ou quand 'start_routine' s'achève.
 ** 
@@ -140,7 +143,7 @@
 ** 
 ** Si 'thread_return' ne vaut pas NULL, la valeur renvoyée par 'th' y sera stockée
 ** 
-** le thread rejoint 'th', doit etre danas l'etat 'joignable'
+** le thread rejoint 'th', doit etre dans l'etat 'joignable'
 ** et pas détaché par pthread_detach.
 ** 
 ** 
@@ -163,7 +166,7 @@
 ** mutex pris que par un seul thread à la fois
 ** un thread qui tente de verrouiller un mutex deja verrouillé, est suspendu jusqu'au déverrouillage
 ** 
-** Iinitialise le mutex pointé par 'mutex' selon les attributs de mutex spécifié par 'mutexattr'
+** Initialise le mutex pointé par 'mutex' selon les attributs de mutex spécifié par 'mutexattr'
 ** 
 ** 
 ** 
@@ -175,8 +178,34 @@
 
 
 //? MAN PTHREAD_MUTEX_DESTROY
-//? MAN PTHREAD_MUTEX_LOCK
-//? MAN PTHREAD_MUTEX_UNLOCK
+/*
+** #include <pthread.h>
+** int pthread_mutex_destroy(pthread_mutex_t *mutex)
+**
+** destroy the mutex object referenced by 'mutex'
+** destroy a locked mutex is an undefined behavior
+**
+*/
 
+//? MAN PTHREAD_MUTEX_LOCK
+/*
+** #include <pthread.h>
+** int pthread_mutex_lock(pthread_mutex_t *mutex)
+** 
+** The calling thread is blocked until the mutex becomes available
+** 
+** 
+** 
+*/
+
+//? MAN PTHREAD_MUTEX_UNLOCK
+/*
+** #include <pthread.h>
+** int pthread_mutex_unlock(pthread_mutex_t *mutex)
+**
+** Release the mutex object referenced by mutex
+**
+**
+*/
 
 

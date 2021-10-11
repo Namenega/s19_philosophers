@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/08/11 17:42:10 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:34:13 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_philo
 	int			time_to_sleep;
 	int			num_of_eat;
 	long int	start_time;
+	long int	actual_time;
 	pthread_t	*philo;
 }				t_philo;
 
@@ -51,7 +52,7 @@ int			parsing(t_philo *philo, char **av);
 */
 
 int			philo(t_philo *ph);
-void		*routine(void *arg);
+// void		*routine(void *arg);
 long int	what_time(t_philo *ph);
 
 /*

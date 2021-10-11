@@ -6,58 +6,116 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/08/11 15:10:35 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:23:50 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static int	parse_time_values(t_philo *ph, char **av)
+static int	parser_time_overview(t_philo *philo, char **av, int i)
 {
-	ph->time_to_die = ft_atoi(av[2]);
-	ph->time_to_eat = ft_atoi(av[3]);
-	ph->time_to_sleep = ft_atoi(av[4]);
-	if (ph->time_to_die < 10 || ph->time_to_eat < 10 || ph->time_to_sleep < 10)
+	int	j;
+
+	j = 0;
+	while (av[i][j])
 	{
-		error_msg("ERROR: 'time' ARGS should be >= 10 milliseconds.\n");
-		return (0);
+		if (av[i][j] < '0' || av[i][j] > '9')
+			return (1);
+		j++;
 	}
-	return (1);
+	if (j > 10)
+		return (1);
+	if (i == 2)
+		philo->time_to_die = ft_atoi(av[i]);
+	else if (i == 3)
+		philo->time_to_eat = ft_atoi(av[i]);
+	else if (i == 4)
+		philo->time_to_sleep = ft_atoi(av[i]);
+	return (0);
 }
 
-static int	check_num_values(t_philo *philo, char **av)
+static int	parser_time(t_philo *philo, char **av)
 {
+	int	i;
+
+	i = 2;
+	while (i <= 4)
+	{
+		if (parser_time_overview(philo, av, i) == 1)
+			return (1);
+		i++;
+	}
+	if (philo->time_to_die < 1 || philo->time_to_eat < 1
+		|| philo->time_to_sleep < 1)
+		return (1);
+	else if (philo->time_to_die > INT32_MAX || philo->time_to_eat > INT32_MAX
+		|| philo->time_to_sleep > INT32_MAX)
+		return (1);
+	return (0);
+}
+
+static int	parser_must_eat(t_philo *philo, char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (1);
+		i++;
+	}
+	if (i > 10)
+		return (1);
+	philo->num_of_eat = ft_atoi(s);
+	if (philo->num_of_eat < 1)
+		return (1);
+	else if (philo->num_of_eat > INT32_MAX)
+		return (1);
+	return (0);
+}
+
+static int	parser_nb_philo(t_philo *philo, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[1][i])
+	{
+		if (av[1][i] < '0' || av[1][i] > '9')
+			return (1);
+		i++;
+	}
+	if (i > 10)
+		return (1);
 	philo->num_philo = ft_atoi(av[1]);
-	if (/*philo->num_philo > 200 || */philo->num_philo < 1)
-	{
-		error_msg("ERROR: 1st ARG must be a number >= 1.\n");
-		// error_msg("ERROR: 1st ARG must be a number between 2 & 200.\n");
-		return (0);
-	}
 	philo->num_forks = ft_atoi(av[1]);
+	if (philo->num_philo < 1 || philo->num_forks < 1)
+		return (1);
+	else if (philo->num_philo > INT32_MAX || philo->num_forks > INT32_MAX)
+		return (1);
 	if (av[5])
-	{
-		philo->num_of_eat = ft_atoi(av[5]);
-		if (philo->num_of_eat < 1)
-		{
-			error_msg("ERROR: philo should eat at least 1 time.\n");
-			return (0);
-		}
-	}
-	return (1);
+		return (parser_must_eat(philo, av[5]));
+	return (0);
 }
 
 int	parsing(t_philo *philo, char **av)
 {
-	if (check_num_values(philo, av) == 0)
-		return (0);
-	if (parse_time_values(philo, av) == 0)
-		return (0);
+	if (parser_nb_philo(philo, av) == 1)
+	{
+		error_msg("Error: philo/forks/time_must_eat argument is wrong\n");
+		return (1);
+	}
+	else if (parser_time(philo, av) == 1)
+	{
+		error_msg("Error: one in time arguments is wrong\n");
+		return (1);
+	}
 	// printf("philo->num_philo = [%d] = [%s]\n", philo->num_philo, av[1]);
 	// printf("philo->num_forks = [%d] = [%s]\n", philo->num_forks, av[1]);
-	// printf("philo->time_to_die = [%f] = [%s]\n", philo->time_to_die, av[2]);
-	// printf("philo->time_to_eat = [%f] = [%s]\n", philo->time_to_eat, av[3]);
-	// printf("philo->time_to_sleep = [%f] = [%s]\n", philo->time_to_sleep, av[4]);
+	// printf("philo->time_to_die = [%d] = [%s]\n", philo->time_to_die, av[2]);
+	// printf("philo->time_to_eat = [%d] = [%s]\n", philo->time_to_eat, av[3]);
+	// printf("philo->time_to_sleep = [%d] = [%s]\n", philo->time_to_sleep, av[4]);
 	// printf("philo->num_of_eat = [%d] = [%s]\n", philo->num_of_eat, av[5]);
-	return (1);
+	return (0);
 }
