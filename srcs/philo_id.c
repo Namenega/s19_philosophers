@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 14:33:05 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 16:31:20 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:27:57 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ static int	initiate_mutex(t_philo *t)
 		return (error_msg(ERR_MALLOC));
 	memset(t->mutex, 0, t->num_philo * 8);
 	while (++i < t->num_philo)
-		pthread_mutex_init(&t->mutex[i], NULL);
-	pthread_mutex_init(&t->write_mutex, NULL);
-	pthread_mutex_init(&t->dead_mutex, NULL);
+	{
+		if (pthread_mutex_init(&t->mutex[i], NULL) != 0)
+			return (error_msg(ERR_MUTEX_INIT));
+
+	}
+	if (pthread_mutex_init(&t->write_mutex, NULL) != 0
+		|| pthread_mutex_init(&t->dead_mutex, NULL))
+		return (error_msg(ERR_MUTEX_INIT));
+	// pthread_mutex_init(&t->write_mutex, NULL);
+	// pthread_mutex_init(&t->dead_mutex, NULL);
 	return (0);
 }
 

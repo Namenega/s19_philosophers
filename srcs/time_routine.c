@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 17:13:09 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:34:07 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static int	is_dead(t_philo *dead)
 		if (what_time(dead) - dead->actual_time[i] > dead->time_to_die)
 		{
 			dead->death = 1;
-			pthread_mutex_lock(&dead->write_mutex);
+			if (pthread_mutex_lock(&dead->write_mutex) != 0)
+				return (error_msg(ERR_MUTEX_LOCK));
 			printf("%ld philo_%d %s\n", what_time(dead), (i + 1), DIED);
-			pthread_mutex_unlock(&dead->dead_mutex);
+			if (pthread_mutex_unlock(&dead->dead_mutex) != 0)
+				return (error_msg(ERR_MUTEX_UNLOCK));
 			return (-1);
 		}
 	}
@@ -48,8 +50,10 @@ static int	count_eat(t_philo *philo)
 	if (count == philo->num_philo)
 	{
 		philo->death = 1;
-		pthread_mutex_lock(&philo->write_mutex);
-		pthread_mutex_unlock(&philo->dead_mutex);
+		if (pthread_mutex_lock(&philo->write_mutex) != 0)
+		 return (error_msg(ERR_MUTEX_LOCK));
+		if (pthread_mutex_unlock(&philo->dead_mutex) != 0)
+			return (error_msg(ERR_MUTEX_UNLOCK));
 		return (-1);
 	}
 	return (0);

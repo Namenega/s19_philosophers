@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:16:22 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:32:07 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-# define ERR_MALLOC	"Error: allocation failed.\n"
-# define DIED		"died.\n"
-# define THINK		"is thinking.\n"
-# define EAT		"is eating.\n"
-# define LEFT_FORK	"has taken left fork.\n"
-# define RIGHT_FORK	"has taken right fork.\n"
-# define SLEEP		"is sleeping.\n"
+# define ERR_MALLOC			"Error: allocation failed.\n"
+# define ERR_CREATE			"Error: pthread_create failed.\n"
+# define ERR_DETACH			"Error: pthread_detach failed.\n"
+# define ERR_MUTEX_INIT		"Error: mutex_init failed.\n"
+# define ERR_MUTEX_DESTROY	"Error: mutex_destroy failed.\n"
+# define ERR_MUTEX_LOCK		"Error: mutex_init failed.\n"
+# define ERR_MUTEX_UNLOCK	"Error: mutex_init failed.\n"
+# define DIED				"died.\n"
+# define THINK				"is thinking.\n"
+# define EAT				"is eating.\n"
+# define LEFT_FORK			"has taken left fork.\n"
+# define RIGHT_FORK			"has taken right fork.\n"
+# define SLEEP				"is sleeping.\n"
 typedef struct	s_philo
 {
 	int				num_philo;
@@ -38,9 +44,9 @@ typedef struct	s_philo
 	int				num_of_eat;
 	int				death;			//do_we_have_a_dead
 	int				*philo_id;
-	int				*nb_meals;		// ate_enough
-	int				*meals;			// did_he_eat_enough
-	long int		start_time;	//start_timer
+	int				*nb_meals;		//ate_enough
+	int				*meals;			//did_he_eat_enough
+	long int		start_time;		//start_timer
 	long int		*actual_time;	//when_did_he_eat
 	pthread_t		*philo;			//thread
 	pthread_t		thread_time;

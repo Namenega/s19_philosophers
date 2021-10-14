@@ -6,25 +6,30 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 16:38:46 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:31:11 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static void	destroy_mutex(t_philo *destroy)
+static int	destroy_mutex(t_philo *destroy)
 {
 	int	i;
 
 	i = -1;
 	while (++i < destroy->num_philo)
 	{
-		pthread_detach(destroy->philo[i]);
-		pthread_mutex_destroy(&destroy->mutex[i]);
+		if (pthread_detach(destroy->philo[i]) != 0)
+			return (error_msg(ERR_DETACH));
+		if (pthread_mutex_destroy(&destroy->mutex[i]) != 0)
+			return (error_msg(ERR_MUTEX_DESTROY));
 	}
-	pthread_detach(destroy->thread_time);
-	pthread_mutex_destroy(&destroy->write_mutex);
-	pthread_mutex_destroy(&destroy->dead_mutex);
+	if (pthread_detach(destroy->thread_time) != 0)
+		return (error_msg(ERR_DETACH));
+	if (pthread_mutex_destroy(&destroy->write_mutex) != 0
+		|| pthread_mutex_destroy(&destroy->dead_mutex) != 0)
+		return (error_msg(ERR_DETACH));
+	return (0);
 }
 
 void	*routine(void *philo)
@@ -58,11 +63,23 @@ int	start(t_philo *philo)
 
 	i = -1;
 	philo->start_time = what_time(philo);
+
+
 	pthread_mutex_lock(&philo->dead_mutex);
-	pthread_create(&philo->thread_time, NULL, &time_routine, NULL);//!protect
+
+
+	if (pthread_create(&philo->thread_time, NULL, &time_routine, NULL) != 0)
+		return (error_msg("Error: failed to create thread.\n"));
+
+
 	while (++i < philo->num_philo)
-		pthread_create(&philo->philo[i], NULL, &routine, &philo->philo_id[i]);//!protect
+		if (pthread_create(&philo->philo[i], NULL, &routine, &philo->philo_id[i]) != 0)
+			return (error_msg("Error: failed to create thread.\n"));
+
+
 	pthread_mutex_lock(&philo->dead_mutex);
-	destroy_mutex(philo);
+	
+	if (destroy_mutex(philo) == -1)
+		return (-1);
 	return (0);
 }

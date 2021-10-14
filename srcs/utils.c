@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:15:25 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:34:55 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int	ft_atoi(const char *nptr)
 
 void	print_action(char *s, t_philo *philo, int curr_philo)
 {
-	pthread_mutex_lock(&philo->write_mutex);
+	if (pthread_mutex_lock(&philo->write_mutex) != 0)
+		return (error_msg(ERR_MUTEX_LOCK));
 	printf("%ld philo_%d %s", what_time(philo), curr_philo, s);
-	pthread_mutex_unlock(&philo->write_mutex);
+	if (pthread_mutex_unlock(&philo->write_mutex) != 0)
+		return (error_msg(ERR_MUTEX_UNLOCK));
 }
 
 t_philo	*get_struct(void)
