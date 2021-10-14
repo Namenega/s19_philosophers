@@ -6,59 +6,31 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/08/11 16:38:45 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:44:56 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	ft_strlen(char *s)
+int	is_digit(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_bzero(void *s, size_t size)
-{
-	size_t			i;
-	unsigned char	*str;
-
-	str = (unsigned char *)s;
-	i = 0;
-
-	while (i < size)
+	while (s[i])
 	{
-		str[i] = '\0';
+		if (s[i] > '9' || s[i] < '0')
+			return (-1);
 		i++;
-	} 
+	}
+	return (0);
 }
 
-void	*ft_calloc(size_t size)
+int	error_msg(char *s)
 {
-	void	*tab;
-
-	tab = malloc(size);
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, size);
-	return (tab);
+	write(1, s, ft_strlen(s));
+	return (-1);
 }
-
-// static int	norminette_v3(unsigned long int result, int compteur)
-// {
-// 	if (result > 2147483648)
-// 	{
-// 		if (compteur == -1)
-// 			return (0);
-// 		else
-// 			return (-1);
-// 	}
-// 	return (compteur);
-// }
 
 int	ft_atoi(const char *nptr)
 {
@@ -71,26 +43,27 @@ int	ft_atoi(const char *nptr)
 	result = 0;
 	while (nptr[j] != '\0')
 	{
-		if (nptr[j] < 48 || nptr[j] > 57)
+		if (nptr[j] < '0' || nptr[j] > '9')
 			return (0);
 		j++;
 	}
-	// while (nptr[i] == '\t' || nptr[i] == '\n' || nptr[i] == '\f'
-	// 	|| nptr[i] == '\r' || nptr[i] == ' ' || nptr[i] == '\v')
-	// 	i++;
-	// if (nptr[i] == '-' || nptr[i] == '+')
-	// {
-	// 	if (nptr[i] == '-')
-	// 		compteur *= -1;
-	// 	i++;
-	// }
+	if (j > 10)
+		return (error_msg("Error: argument can't bigger than 2147483647"));
 	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
-	// compteur = norminette_v3(result, compteur);
+	if (result > INT32_MAX)
+		return (error_msg("Error: argument can't bigger than 2147483647"));
 	return (result);
+}
+
+void	print_action(char *s, t_philo *philo, int curr_philo)
+{
+	pthread_mutex_lock(&philo->write_mutex);
+	printf("%ld %d %s", what_time(philo), curr_philo, s);
+	pthread_mutex_unlock(&philo->write_mutex);
 }
 
 t_philo	*get_struct(void)
