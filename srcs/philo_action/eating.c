@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 16:56:44 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 16:41:32 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:37:34 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	eating(int curr_philo, t_philo *philo)
 	long int	time_till_dead;
 
 	i = -1;
-	pthread_mutex_lock(&philo->mutex[philo->left_fork]);
+	if (pthread_mutex_lock(&philo->mutex[philo->left_fork]) != 0)
+		return (error_msg(ERR_MUTEX_LOCK));
 	print_action(LEFT_FORK, philo, curr_philo + 1);
-	pthread_mutex_lock(&philo->mutex[philo->right_fork]);
+	if (pthread_mutex_lock(&philo->mutex[philo->right_fork]) != 0)
+		return (error_msg(ERR_MUTEX_LOCK));
 	if (philo->death == 0)
 	{
 		philo->actual_time[curr_philo] = what_time(philo);
@@ -35,6 +37,8 @@ void	eating(int curr_philo, t_philo *philo)
 			usleep(100);
 		}
 	}
-	pthread_mutex_unlock(&philo->mutex[philo->left_fork]);
-	pthread_mutex_unlock(&philo->mutex[philo->right_fork]);
+	if (pthread_mutex_unlock(&philo->mutex[philo->left_fork]) != 0)
+		return (error_msg(ERR_MUTEX_UNLOCK));
+	if (pthread_mutex_unlock(&philo->mutex[philo->right_fork]) != 0)
+		return (error_msg(ERR_MUTEX_UNLOCK));
 }

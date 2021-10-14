@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 17:31:11 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:38:56 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,21 @@ int	start(t_philo *philo)
 	philo->start_time = what_time(philo);
 
 
-	pthread_mutex_lock(&philo->dead_mutex);
+	if (pthread_mutex_lock(&philo->dead_mutex) != 0)
+		return (error_msg(ERR_MUTEX_LOCK));
 
 
 	if (pthread_create(&philo->thread_time, NULL, &time_routine, NULL) != 0)
-		return (error_msg("Error: failed to create thread.\n"));
+		return (error_msg(ERR_CREATE));
 
 
 	while (++i < philo->num_philo)
 		if (pthread_create(&philo->philo[i], NULL, &routine, &philo->philo_id[i]) != 0)
-			return (error_msg("Error: failed to create thread.\n"));
+			return (error_msg(ERR_CREATE));
 
 
-	pthread_mutex_lock(&philo->dead_mutex);
+	if (pthread_mutex_lock(&philo->dead_mutex) != 0)
+		return (error_msg(ERR_MUTEX_LOCK));
 	
 	if (destroy_mutex(philo) == -1)
 		return (-1);
