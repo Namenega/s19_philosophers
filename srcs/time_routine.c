@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 16:49:01 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:13:09 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_dead(t_philo *dead)
 		{
 			dead->death = 1;
 			pthread_mutex_lock(&dead->write_mutex);
-			printf("%ld %d %s\n", what_time(dead), (i + 1), DIED);
+			printf("%ld philo_%d %s\n", what_time(dead), (i + 1), DIED);
 			pthread_mutex_unlock(&dead->dead_mutex);
 			return (-1);
 		}
@@ -40,7 +40,7 @@ static int	count_eat(t_philo *philo)
 	count = 0;
 	while (++i < philo->num_philo)
 		if (philo->meals[i] == philo->num_of_eat)
-			philo->nb_meals = 1;
+			philo->nb_meals[i] = 1;
 	i = -1;
 	while (++i < philo->num_philo)
 		if (philo->nb_meals[i] == 1)

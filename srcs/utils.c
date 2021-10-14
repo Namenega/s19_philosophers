@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_0.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 16:44:56 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:15:25 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ int	is_digit(char *s)
 	return (0);
 }
 
-int	error_msg(char *s)
+size_t	ft_strlen(char *s)
 {
-	write(1, s, ft_strlen(s));
-	return (-1);
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }
 
 int	ft_atoi(const char *nptr)
@@ -62,7 +68,7 @@ int	ft_atoi(const char *nptr)
 void	print_action(char *s, t_philo *philo, int curr_philo)
 {
 	pthread_mutex_lock(&philo->write_mutex);
-	printf("%ld %d %s", what_time(philo), curr_philo, s);
+	printf("%ld philo_%d %s", what_time(philo), curr_philo, s);
 	pthread_mutex_unlock(&philo->write_mutex);
 }
 

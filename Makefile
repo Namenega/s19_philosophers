@@ -1,7 +1,12 @@
-SRCNAME 	=	srcs/main.c				\
-				srcs/parsing.c			\
-				srcs/utils_0.c			\
-				srcs/philo.c
+SRCNAME 	=	srcs/main.c						\
+				srcs/parser.c					\
+				srcs/philo_id.c					\
+				srcs/philo.c					\
+				srcs/time_routine.c				\
+				srcs/utils.c					\
+				srcs/philo_action/eating.c		\
+				srcs/philo_action/thinking.c	\
+				srcs/philo_action/sleeping.c
 
 SRCS 		= ${SRCNAME}
 

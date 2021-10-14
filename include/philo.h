@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 16:48:23 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:16:22 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-# define ERR_MALLOC	"Error: allocation failed."
-# define DIED		"died."
-# define THINK		"is thinking."
-# define EAT		"is eating."
-# define LEFT_FORK	"has taken left fork."
-# define RIGHT_FORK	"has taken right fork."
-# define SLEEP		"is sleeping."
+# define ERR_MALLOC	"Error: allocation failed.\n"
+# define DIED		"died.\n"
+# define THINK		"is thinking.\n"
+# define EAT		"is eating.\n"
+# define LEFT_FORK	"has taken left fork.\n"
+# define RIGHT_FORK	"has taken right fork.\n"
+# define SLEEP		"is sleeping.\n"
 typedef struct	s_philo
 {
 	int				num_philo;
@@ -53,6 +53,7 @@ typedef struct	s_philo
 /*********************************** MAIN_C ***********************************/
 
 int			main(int ac, char **av);
+int			error_msg(char *s);
 
 /********************************** PARSER_C **********************************/
 
@@ -89,16 +90,7 @@ void		sleeping(int curr_philo, t_philo *philo);
 t_philo		*get_struct(void);
 void		print_action(char *s, t_philo *philo, int curr_philo);
 int			ft_atoi(const char *nptr);
-int			error_msg(char *s);
+size_t		ft_strlen(char *s);
 int			is_digit(char *s);
-
-
-
-
-
-
-
-
-
 
 #endif

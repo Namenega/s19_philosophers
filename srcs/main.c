@@ -6,11 +6,17 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 15:59:46 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 16:52:15 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:02:23 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	error_msg(char *s)
+{
+	write(1, s, ft_strlen(s));
+	return (-1);
+}
 
 static void	free_philo(t_philo *philo)
 {

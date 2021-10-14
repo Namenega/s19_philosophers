@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 16:34:36 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:11:24 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parser_arg(int ac, char **av, t_philo *ph)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (++i < ac)
 		if (is_digit(av[i]) == -1)
 			return (error_msg("Error: mistake in arguments."));
