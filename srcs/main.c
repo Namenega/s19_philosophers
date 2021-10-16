@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 15:59:46 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:02:23 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:12:14 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ static void	initiate_struct(t_philo *ph)
 	ph->start_time = 0;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_philo	*philo;
 
 	philo = get_struct();
 	initiate_struct(philo);
 	if (ac != 5 && ac != 6)
-		return(error_msg("ERROR: wrong number of ARGS"));
+		return (error_msg("Error: wrong number of arguments."));
 	if (parser_arg(ac, av, philo) == -1)
-		return (-1);
+		return (error_msg("Error: failed to get parsing values."));
 	if (get_philo_id(philo) == -1)
 		return (-1);
 	if (start(philo) == -1)

@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:34:55 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:12:34 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,30 @@ int	ft_atoi(const char *nptr)
 		j++;
 	}
 	if (j > 10)
-		return (error_msg("Error: argument can't bigger than 2147483647"));
+		return (error_msg("Error: argument can't be bigger than 2147483647."));
 	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
 	if (result > INT32_MAX)
-		return (error_msg("Error: argument can't bigger than 2147483647"));
+		return (error_msg("Error: argument can't be bigger than 2147483647."));
 	return (result);
 }
 
-void	print_action(char *s, t_philo *philo, int curr_philo)
+int	print_action(char *s, t_philo *philo, int curr_philo)
 {
 	if (pthread_mutex_lock(&philo->write_mutex) != 0)
 		return (error_msg(ERR_MUTEX_LOCK));
 	printf("%ld philo_%d %s", what_time(philo), curr_philo, s);
 	if (pthread_mutex_unlock(&philo->write_mutex) != 0)
 		return (error_msg(ERR_MUTEX_UNLOCK));
+	return (0);
 }
 
 t_philo	*get_struct(void)
 {
-	static t_philo ph;
+	static t_philo	ph;
 
 	return (&ph);
 }

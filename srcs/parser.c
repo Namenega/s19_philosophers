@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:11:24 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:12:17 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	parser_data(char **av, t_philo *data)
 	else
 		data->num_of_eat = 0;
 	return (0);
-
 }
 
 int	parser_arg(int ac, char **av, t_philo *ph)

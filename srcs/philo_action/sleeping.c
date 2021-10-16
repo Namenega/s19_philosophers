@@ -6,13 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 17:00:15 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 16:42:40 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:01:47 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-void	sleeping(int curr_philo, t_philo *philo)
+int	sleeping(int curr_philo, t_philo *philo)
 {
 	int			i;
 	long int	time_till_death;
@@ -20,7 +20,8 @@ void	sleeping(int curr_philo, t_philo *philo)
 	i = 0;
 	if (philo->death == 0)
 	{
-		print_action(SLEEP, philo, curr_philo + 1);
+		if (print_action(SLEEP, philo, curr_philo + 1) == -1)
+			return (-1);
 		time_till_death = what_time(philo);
 		while (++i < (10 * philo->time_to_sleep))
 		{
@@ -29,4 +30,5 @@ void	sleeping(int curr_philo, t_philo *philo)
 			usleep(100);
 		}
 	}
+	return (0);
 }

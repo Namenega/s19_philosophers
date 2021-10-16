@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/14 17:32:07 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 18:16:14 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # define LEFT_FORK			"has taken left fork.\n"
 # define RIGHT_FORK			"has taken right fork.\n"
 # define SLEEP				"is sleeping.\n"
-typedef struct	s_philo
+
+typedef struct s_philo
 {
 	int				num_philo;
 	int				left_fork;
@@ -54,7 +55,6 @@ typedef struct	s_philo
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	dead_mutex;
 }				t_philo;
-
 
 /*********************************** MAIN_C ***********************************/
 
@@ -81,20 +81,20 @@ long int	what_time(t_philo *ph);
 
 /********************************** EATING_C **********************************/
 
-void		eating(int curr_philo, t_philo *philo);
+int			eating(int curr_philo, t_philo *philo, int left_fork, int right_fork);
 
 /********************************* THINKING_C *********************************/
 
-void		thinking(int curr_philo, t_philo *philo);
+int			thinking(int curr_philo, t_philo *philo);
 
 /********************************* SLEEPING_C *********************************/
 
-void		sleeping(int curr_philo, t_philo *philo);
+int			sleeping(int curr_philo, t_philo *philo);
 
 /********************************** UTILS_C ***********************************/
 
 t_philo		*get_struct(void);
-void		print_action(char *s, t_philo *philo, int curr_philo);
+int			print_action(char *s, t_philo *philo, int curr_philo);
 int			ft_atoi(const char *nptr);
 size_t		ft_strlen(char *s);
 int			is_digit(char *s);

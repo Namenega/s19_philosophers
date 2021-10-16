@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/14 17:34:07 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 13:40:18 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	count_eat(t_philo *philo)
 	{
 		philo->death = 1;
 		if (pthread_mutex_lock(&philo->write_mutex) != 0)
-		 return (error_msg(ERR_MUTEX_LOCK));
+			return (error_msg(ERR_MUTEX_LOCK));
 		if (pthread_mutex_unlock(&philo->dead_mutex) != 0)
 			return (error_msg(ERR_MUTEX_UNLOCK));
 		return (-1);
