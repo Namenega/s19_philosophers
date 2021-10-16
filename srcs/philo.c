@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/16 18:47:07 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/16 19:04:48 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	destroy_mutex(t_philo *destroy)
 	// 	return (-1);
 	pthread_mutex_destroy(&(destroy->write_mutex));
 	pthread_mutex_destroy(&(destroy->dead_mutex));
-		return (error_msg(ERR_MUTEX_DESTROY));
+		// return (error_msg(ERR_MUTEX_DESTROY));
 	return (0);
 }
 
@@ -54,14 +54,14 @@ void	*routine(void *philo)
 	{
 		right_fork = curr_philo;
 		left_fork = (right_fork + 1) % ph->num_philo;
-		usleep(500);
+		usleep(200);
 	}
 	ph->actual_time[curr_philo] = what_time(ph);
 	while (ph->death == 0)
 	{
-		thinking(curr_philo, ph);
 		eating(curr_philo, ph, left_fork, right_fork);
 		sleeping(curr_philo, ph);
+		thinking(curr_philo, ph);
 	}
 	return (NULL);
 }
