@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 15:59:46 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/16 14:12:14 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 16:29:27 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	main(int ac, char **av)
 	philo = get_struct();
 	initiate_struct(philo);
 	if (ac != 5 && ac != 6)
-		return (error_msg("Error: wrong number of arguments."));
+		return (error_msg("Error: wrong number of arguments.\n"));
 	if (parser_arg(ac, av, philo) == -1)
-		return (error_msg("Error: failed to get parsing values."));
+		return (-1);
 	if (get_philo_id(philo) == -1)
 		return (-1);
 	if (start(philo) == -1)

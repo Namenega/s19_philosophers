@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/16 19:01:03 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 16:36:54 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int	ft_atoi(const char *nptr)
 		j++;
 	}
 	if (j > 10)
-		return (error_msg("Error: argument can't be bigger than 2147483647."));
+		return (error_msg("Error: arg can't be bigger than 2147483647.\n"));
 	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
 	if (result > INT32_MAX)
-		return (error_msg("Error: argument can't be bigger than 2147483647."));
+		return (error_msg("Error: arg can't be bigger than 2147483647.\n"));
 	return (result);
 }
 

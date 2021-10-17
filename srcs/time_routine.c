@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/16 13:40:18 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 16:47:38 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_dead(t_philo *dead)
 			dead->death = 1;
 			if (pthread_mutex_lock(&dead->write_mutex) != 0)
 				return (error_msg(ERR_MUTEX_LOCK));
-			printf("%ld philo_%d %s\n", what_time(dead), (i + 1), DIED);
+			printf("%ld philo_%d %s", what_time(dead), (i + 1), DIED);
 			if (pthread_mutex_unlock(&dead->dead_mutex) != 0)
 				return (error_msg(ERR_MUTEX_UNLOCK));
 			return (-1);
