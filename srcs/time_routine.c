@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/17 16:47:38 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 17:26:41 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ long int	what_time(t_philo *ph)
 	struct timeval	tv;
 	long int		ms;
 
-	gettimeofday(&tv, NULL);
+	if (gettimeofday(&tv, NULL) == -1)
+		return (-1);
 	ms = tv.tv_sec * 1000;
 	ms += tv.tv_usec / 1000;
 	return (ms - ph->start_time);
