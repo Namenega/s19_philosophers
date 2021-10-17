@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:57:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/11 15:20:07 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 20:20:20 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*routine(void *arg)
 {
 	pthread_mutex_lock(&mutex);
 	int	index = *(int *)arg;
+	
 	printf("%d\n", primes[index]);
 	free(arg);
 	pthread_mutex_unlock(&mutex);
