@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/17 16:29:22 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/17 22:26:22 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ static int	parser_data(char **av, t_philo *data)
 	if (data->time_to_sleep <= 0)
 		return (-1);
 	if (av[5])
+	{
 		data->num_of_eat = ft_atoi(av[5]);
+		if (data->num_of_eat <= 0)
+			return (-1);
+	}
 	else
 		data->num_of_eat = 0;
 	return (0);
