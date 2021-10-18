@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 15:46:12 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:03:17 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/****************************** Handle dead timer *****************************/
 
 static int	is_dead(t_philo *dead)
 {
@@ -19,7 +21,7 @@ static int	is_dead(t_philo *dead)
 	i = -1;
 	while (++i < dead->num_philo)
 	{
-		if (what_time(dead) - dead->actual_time[i] > dead->time_to_die)
+		if (what_time(dead) - dead->start_eat_time[i] > dead->time_to_die)
 		{
 			dead->death = 1;
 			if (pthread_mutex_lock(&dead->write_mutex) != 0)
@@ -33,6 +35,8 @@ static int	is_dead(t_philo *dead)
 	return (0);
 }
 
+/********************* Count number of time each philo eat ********************/
+
 static int	count_eat(t_philo *philo)
 {
 	int	i;
@@ -42,10 +46,10 @@ static int	count_eat(t_philo *philo)
 	count = 0;
 	while (++i < philo->num_philo)
 		if (philo->meals[i] == philo->num_of_eat)
-			philo->nb_meals[i] = 1;
+			philo->eat_enough_status[i] = 1;
 	i = -1;
 	while (++i < philo->num_philo)
-		if (philo->nb_meals[i] == 1)
+		if (philo->eat_enough_status[i] == 1)
 			count++;
 	if (count == philo->num_philo)
 	{
@@ -59,6 +63,8 @@ static int	count_eat(t_philo *philo)
 	return (0);
 }
 
+/******************************** Get real time *******************************/
+
 long int	what_time(t_philo *ph)
 {
 	struct timeval	tv;
@@ -71,6 +77,8 @@ long int	what_time(t_philo *ph)
 	return (ms - ph->start_time);
 }
 
+/*********************** Get more precision with sleep ************************/
+
 void	ft_usleep(long int time_in_ms, t_philo *philo)
 {
 	long int	start_time;
@@ -80,6 +88,8 @@ void	ft_usleep(long int time_in_ms, t_philo *philo)
 	while ((what_time(philo) - start_time) < time_in_ms)
 		usleep(time_in_ms / 10);
 }
+
+/***************************** Routine around time ****************************/
 
 void	*time_routine(void *time_arg)
 {

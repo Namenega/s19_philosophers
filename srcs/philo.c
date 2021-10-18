@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 15:28:44 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:10:31 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/************************** Destroy mutex and thread **************************/
 
 static int	destroy_mutex(t_philo *destroy)
 {
@@ -32,6 +34,8 @@ static int	destroy_mutex(t_philo *destroy)
 	return (0);
 }
 
+/*************************** Routine for each philo ***************************/
+
 void	*routine(void *philo)
 {
 	t_philo	*ph;
@@ -49,7 +53,7 @@ void	*routine(void *philo)
 		left_fork = (right_fork + 1) % ph->num_philo;
 		usleep(200);
 	}
-	ph->actual_time[curr_philo] = what_time(ph);
+	ph->start_eat_time[curr_philo] = what_time(ph);
 	while (ph->death == 0)
 	{
 		eating(curr_philo, ph, left_fork, right_fork);
@@ -58,6 +62,13 @@ void	*routine(void *philo)
 	}
 	return (NULL);
 }
+
+/*
+** Get beginning time
+** Routine time
+** Routine threading
+** Destroy mutex/threads
+*/
 
 int	start(t_philo *philo)
 {

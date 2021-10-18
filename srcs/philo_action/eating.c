@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 16:56:44 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 15:37:16 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:16:02 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+
+/************************** Lock and eating process ***************************/
 
 static int	eating_action(int curr_philo, t_philo *philo)
 {
@@ -18,7 +20,7 @@ static int	eating_action(int curr_philo, t_philo *philo)
 	long int	time_till_dead;
 
 	i = -1;
-	philo->actual_time[curr_philo] = what_time(philo);
+	philo->start_eat_time[curr_philo] = what_time(philo);
 	philo->meals[curr_philo]++;
 	if (print_action(RIGHT_FORK, philo, (curr_philo + 1)) == -1)
 		return (-1);
@@ -33,6 +35,8 @@ static int	eating_action(int curr_philo, t_philo *philo)
 	}
 	return (0);
 }
+
+/************************** Lock and eating process ***************************/
 
 int	eating(int curr_philo, t_philo *philo, int left_fork, int right_fork)
 {

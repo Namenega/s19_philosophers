@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 14:33:05 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/16 14:20:17 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:03:17 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static int	initiate_mutex(t_philo *t)
 		return (error_msg(ERR_MALLOC));
 	memset(t->mutex, 0, t->num_philo * 8);
 	while (++i < t->num_philo)
-	{
 		if (pthread_mutex_init(&t->mutex[i], NULL) != 0)
 			return (error_msg(ERR_MUTEX_INIT));
-	}
 	if (pthread_mutex_init(&t->write_mutex, NULL) != 0
 		|| pthread_mutex_init(&t->dead_mutex, NULL) != 0)
 		return (error_msg(ERR_MUTEX_INIT));
@@ -41,17 +39,17 @@ static int	initiate_mutex(t_philo *t)
 static int	get_id_next(t_philo *ph_id, int i)
 {
 	i = -1;
-	ph_id->actual_time = malloc(sizeof(long int) * ph_id->num_philo);
-	if (!ph_id->actual_time)
+	ph_id->start_eat_time = malloc(sizeof(long int) * ph_id->num_philo);
+	if (!ph_id->start_eat_time)
 		return (error_msg(ERR_MALLOC));
 	while (++i < ph_id->num_philo)
-		ph_id->actual_time[i] = 0;
-	ph_id->nb_meals = malloc(sizeof(int) * ph_id->num_philo);
-	if (!ph_id->nb_meals)
+		ph_id->start_eat_time[i] = 0;
+	ph_id->eat_enough_status = malloc(sizeof(int) * ph_id->num_philo);
+	if (!ph_id->eat_enough_status)
 		return (error_msg(ERR_MALLOC));
 	i = -1;
 	while (++i < ph_id->num_philo)
-		ph_id->nb_meals[i] = 0;
+		ph_id->eat_enough_status[i] = 0;
 	return (0);
 }
 

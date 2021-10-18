@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:47:32 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/17 22:26:22 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 22:20:33 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/***************************** Get argv with atoi *****************************/
 
 static int	parser_data(char **av, t_philo *data)
 {
@@ -36,6 +38,8 @@ static int	parser_data(char **av, t_philo *data)
 		data->num_of_eat = 0;
 	return (0);
 }
+
+/*************************** Checking errors in argv **************************/
 
 int	parser_arg(int ac, char **av, t_philo *ph)
 {

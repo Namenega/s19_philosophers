@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/18 15:38:54 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:03:17 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_philo
 	int				num_of_eat;
 	int				death;
 	int				*philo_id;
-	int				*nb_meals;
+	int				*eat_enough_status;
 	int				*meals;
 	long int		start_time;
-	long int		*actual_time;
+	long int		*start_eat_time;
 	pthread_t		*philo;
 	pthread_t		thread_time;
 	pthread_mutex_t	*mutex;

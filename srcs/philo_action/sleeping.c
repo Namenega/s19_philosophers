@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 17:00:15 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 15:38:02 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:18:22 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
+
+/****************************** Sleeping process ******************************/
 
 int	sleeping(int curr_philo, t_philo *philo)
 {

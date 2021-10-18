@@ -6,11 +6,13 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 15:59:46 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/18 15:56:46 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:03:17 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/***************************** Print error message ****************************/
 
 int	error_msg(char *s)
 {
@@ -18,15 +20,19 @@ int	error_msg(char *s)
 	return (-1);
 }
 
+/************************** Free the allocate memory **************************/
+
 static void	free_philo(t_philo *philo)
 {
 	free(philo->philo_id);
-	free(philo->nb_meals);
-	free(philo->actual_time);
+	free(philo->eat_enough_status);
+	free(philo->start_eat_time);
 	free(philo->meals);
 	free(philo->philo);
 	free(philo->mutex);
 }
+
+/*************************** Initiate the structure ***************************/
 
 static void	initiate_struct(t_philo *ph)
 {
@@ -39,10 +45,12 @@ static void	initiate_struct(t_philo *ph)
 	ph->num_of_eat = 0;
 	ph->death = 0;
 	ph->philo_id = NULL;
-	ph->nb_meals = NULL;
+	ph->eat_enough_status = NULL;
 	ph->meals = NULL;
 	ph->start_time = 0;
 }
+
+/************************** Parsing, Philo info, Algo *************************/
 
 int	main(int ac, char **av)
 {

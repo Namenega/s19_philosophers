@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/18 15:45:33 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:20:19 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	ft_atoi(const char *nptr)
 	return (result);
 }
 
+/************************ Lock & Print current action *************************/
+
 int	print_action(char *s, t_philo *philo, int curr_philo)
 {
 	if (pthread_mutex_lock(&philo->write_mutex) != 0)
@@ -74,6 +76,8 @@ int	print_action(char *s, t_philo *philo, int curr_philo)
 		return (error_msg(ERR_MUTEX_UNLOCK));
 	return (0);
 }
+
+/************************ Help to reach the structure *************************/
 
 t_philo	*get_struct(void)
 {
