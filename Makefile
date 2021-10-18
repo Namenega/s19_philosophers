@@ -14,7 +14,7 @@ OBJS 		= ${SRCS:.c=.o}
 
 NAME		= philo
 
-CC 			= gcc -g #-fsanitize=address
+CC 			= gcc -g
 RM 			= rm -f
 CFLAGS 		= -pthread -Wall -Wextra -Werror
 
@@ -47,7 +47,6 @@ clean:
 		@echo "$(CEND)"
 		@echo "$(CGREEN)Deleting done !$(CEND)"
 		@echo
-		@echo
 
 fclean:		clean
 		@echo "$(CYELLOW)Deleting .o files and philo$(CEND)"
@@ -55,7 +54,6 @@ fclean:		clean
 		${RM} ${NAME}
 		@echo "$(CEND)"
 		@echo "$(CGREEN)Deleting done !$(CEND)"
-		@echo
 		@echo
 
 re: 		fclean all
