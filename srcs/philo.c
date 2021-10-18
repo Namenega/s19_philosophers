@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:15:49 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/16 19:04:48 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:28:44 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,13 @@ static int	destroy_mutex(t_philo *destroy)
 		if (pthread_detach(destroy->philo[i]) != 0)
 			return (error_msg(ERR_DETACH));
 		if (pthread_mutex_destroy(&(destroy->mutex[i])) != 0)
-		{
-			// printf("%d\n", i);
 			return (-1);
-		}
 		i++;
 	}
 	if (pthread_detach(destroy->thread_time) != 0)
 		return (error_msg(ERR_DETACH));
-	// if (pthread_mutex_destroy(&(destroy->write_mutex)) != 0
-	// 	|| pthread_mutex_destroy(&(destroy->dead_mutex)) != 0)
-	// 	return (-1);
 	pthread_mutex_destroy(&(destroy->write_mutex));
 	pthread_mutex_destroy(&(destroy->dead_mutex));
-		// return (error_msg(ERR_MUTEX_DESTROY));
 	return (0);
 }
 

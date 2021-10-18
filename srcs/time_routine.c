@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/17 17:26:41 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:46:12 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_dead(t_philo *dead)
 			dead->death = 1;
 			if (pthread_mutex_lock(&dead->write_mutex) != 0)
 				return (error_msg(ERR_MUTEX_LOCK));
-			printf("%ld philo_%d %s", what_time(dead), (i + 1), DIED);
+			printf("%ld %d %s", what_time(dead), (i + 1), DIED);
 			if (pthread_mutex_unlock(&dead->dead_mutex) != 0)
 				return (error_msg(ERR_MUTEX_UNLOCK));
 			return (-1);
@@ -71,6 +71,16 @@ long int	what_time(t_philo *ph)
 	return (ms - ph->start_time);
 }
 
+void	ft_usleep(long int time_in_ms, t_philo *philo)
+{
+	long int	start_time;
+
+	start_time = 0;
+	start_time = what_time(philo);
+	while ((what_time(philo) - start_time) < time_in_ms)
+		usleep(time_in_ms / 10);
+}
+
 void	*time_routine(void *time_arg)
 {
 	t_philo	*time_ph;
@@ -84,7 +94,7 @@ void	*time_routine(void *time_arg)
 				return (NULL);
 		if (is_dead(time_ph) == -1)
 			return (NULL);
-		usleep(4000);
+		ft_usleep(time_ph->death, time_ph);
 	}
 	return (NULL);
 }

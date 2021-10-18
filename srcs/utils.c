@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/17 16:36:54 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:45:33 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	print_action(char *s, t_philo *philo, int curr_philo)
 {
 	if (pthread_mutex_lock(&philo->write_mutex) != 0)
 		return (error_msg(ERR_MUTEX_LOCK));
-	printf("%ld philo_%d %s", what_time(philo), curr_philo, s);
+	printf("%ld %d %s", what_time(philo), curr_philo, s);
 	if (pthread_mutex_unlock(&philo->write_mutex) != 0)
 		return (error_msg(ERR_MUTEX_UNLOCK));
 	return (0);

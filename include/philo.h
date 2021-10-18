@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:03:28 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/16 18:16:14 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:38:54 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ typedef struct s_philo
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_of_eat;
-	int				death;			//do_we_have_a_dead
+	int				death;
 	int				*philo_id;
-	int				*nb_meals;		//ate_enough
-	int				*meals;			//did_he_eat_enough
-	long int		start_time;		//start_timer
-	long int		*actual_time;	//when_did_he_eat
-	pthread_t		*philo;			//thread
+	int				*nb_meals;
+	int				*meals;
+	long int		start_time;
+	long int		*actual_time;
+	pthread_t		*philo;
 	pthread_t		thread_time;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	write_mutex;
@@ -77,11 +77,12 @@ void		*routine(void *philo);
 /******************************* TIME_ROUTINE_C *******************************/
 
 void		*time_routine(void *time_arg);
+void		ft_usleep(long int time_in_ms, t_philo *philo);
 long int	what_time(t_philo *ph);
 
 /********************************** EATING_C **********************************/
 
-int			eating(int curr_philo, t_philo *philo, int left_fork, int right_fork);
+int			eating(int curr_philo, t_philo *philo, int l_fork, int r_fork);
 
 /********************************* THINKING_C *********************************/
 
