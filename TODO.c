@@ -80,7 +80,7 @@
 **
 ** Suspend l'exécution d'un programme
 ** durant 'usec' microsecondes
-** 
+**
 ** return 0 ou -1 (erreur)
 */
 
@@ -106,11 +106,11 @@
 **
 ** Crée un nouveau thread s'exécutant simultanément avec le thread appelant
 ** Nouveau thread exécute la fonction 'start routine' (void*) en lui passant 'arg' comme premier argument
-** 
+**
 ** S'arrête avec pthread_exit ou quand 'start_routine' s'achève.
-** 
+**
 ** 'attr' indique les attributs du nouveau thread (peut etre  = NULL)
-** 
+**
 ** return 0 et id du nouveau thread est pointé par l'argument 'thread'
 ** return != 0 en cas d'erreur.
 */
@@ -124,11 +124,11 @@
 ** Place le thread 'th' en état 'détaché' (?)
 ** -> Garantit que les ressources mémoires consommées par 'th' seront
 ** immédiatement libérées lorsque l'execution de 'th' s'achèvera.
-** 
+**
 ** !! : Empeche les autres threads de se synchroniser sur la mort de 'th' en utilisant 'pthread_join'
-** 
+**
 ** pthread_detach ne s'applique qu'aux threads créés dans l'état 'joignable' (?)
-** 
+**
 ** return 0
 ** return != 0 en cas d'erreur.
 */
@@ -145,10 +145,7 @@
 ** 
 ** le thread rejoint 'th', doit etre dans l'etat 'joignable'
 ** et pas détaché par pthread_detach.
-** 
-** 
-** 
-** 
+**
 ** succes : valeur renvoyée par 'th' est enregistrée à l'emplacement pointé par 'thread_return
 ** succes : return 0
 ** return != 0 en cas d'erreur.
@@ -165,13 +162,8 @@
 ** mutex peut être verrouillé (appartenant à un thread)
 ** mutex pris que par un seul thread à la fois
 ** un thread qui tente de verrouiller un mutex deja verrouillé, est suspendu jusqu'au déverrouillage
-** 
+**
 ** Initialise le mutex pointé par 'mutex' selon les attributs de mutex spécifié par 'mutexattr'
-** 
-** 
-** 
-** 
-** 
 ** return tjs 0
 ** return != 0 en cas d'erreur.
 */
@@ -184,18 +176,14 @@
 **
 ** destroy the mutex object referenced by 'mutex'
 ** destroy a locked mutex is an undefined behavior
-**
 */
 
 //? MAN PTHREAD_MUTEX_LOCK
 /*
 ** #include <pthread.h>
 ** int pthread_mutex_lock(pthread_mutex_t *mutex)
-** 
+**
 ** The calling thread is blocked until the mutex becomes available
-** 
-** 
-** 
 */
 
 //? MAN PTHREAD_MUTEX_UNLOCK
@@ -204,8 +192,22 @@
 ** int pthread_mutex_unlock(pthread_mutex_t *mutex)
 **
 ** Release the mutex object referenced by mutex
-**
-**
 */
 
-
+/*
+** TESTS
+**
+** ./philo 1 200 200 200			philo 1 ne prend qu'une fourchette et meurt au bout de 200 ms
+** ./philo 2 800 200 200			personne ne meurt
+** ./philo 5 800 200 200			personne ne meurt
+** ./philo 5 800 200 200 7			la simulation s'arrete quand chaque philo a mange 7 fois
+** ./philo 4 410 200 200			personne ne meurt
+** ./philo 4 310 200 200			un philo meurt
+** ./philo 4 500 200 1.2			argument invalide
+** ./philo 4 0 200 200				argument invalide
+** ./philo 4 -500 200 200			argument invalide
+** ./philo 4 500 200 2147483647		un philo meurt au bout de 500 ms
+** ./philo 4 2147483647 200 200		personne ne meurt
+** ./philo 4 214748364732 200 200	argument invalide
+** ./philo 4 200 210 200			un philo meurt, il faut afficher la mort avant 210 ms
+*/
