@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 16:56:44 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 23:16:02 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:43:24 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ static int	eating_action(int curr_philo, t_philo *philo)
 	if (print_action(EAT, philo, (curr_philo + 1)) == -1)
 		return (-1);
 	time_till_dead = what_time(philo);
-	while (++i < (10 * philo->time_to_eat))
-	{
-		if (what_time(philo) - time_till_dead >= philo->time_to_eat)
-			break ;
-		ft_usleep(philo->time_to_eat, philo);
-	}
+	ft_usleep(philo->time_to_eat, philo);
 	return (0);
 }
 

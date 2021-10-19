@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 16:35:30 by pyg               #+#    #+#             */
-/*   Updated: 2021/10/18 23:20:19 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:08:50 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	ft_atoi(const char *nptr)
 	i = 0;
 	j = 0;
 	result = 0;
+	while (*nptr == '0')
+		nptr++;
 	while (nptr[j] != '\0')
 	{
 		if (nptr[j] < '0' || nptr[j] > '9')
@@ -54,7 +56,7 @@ int	ft_atoi(const char *nptr)
 		j++;
 	}
 	if (j > 10)
-		return (error_msg("Error: arg can't be bigger than 2147483647.\n"));
+		return (error_msg("Error: arg is too long.\n"));
 	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');

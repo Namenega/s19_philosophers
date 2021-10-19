@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:21:59 by namenega          #+#    #+#             */
-/*   Updated: 2021/10/18 23:03:17 by namenega         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:42:51 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ void	ft_usleep(long int time_in_ms, t_philo *philo)
 {
 	long int	start_time;
 
-	start_time = 0;
 	start_time = what_time(philo);
 	while ((what_time(philo) - start_time) < time_in_ms)
-		usleep(time_in_ms / 10);
+	{
+		usleep(500);
+	}
 }
 
 /***************************** Routine around time ****************************/
@@ -104,7 +105,7 @@ void	*time_routine(void *time_arg)
 				return (NULL);
 		if (is_dead(time_ph) == -1)
 			return (NULL);
-		ft_usleep(time_ph->death, time_ph);
+		usleep(500);
 	}
 	return (NULL);
 }
